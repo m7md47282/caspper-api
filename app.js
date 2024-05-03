@@ -70,9 +70,18 @@ app.post("/api/section", (req, res, next) => {
     }
 
     if(req.body._id){
-        Section.updateOne({ _id: req.body._id }, { $set: { section } })
-            .then(result => {
-                console.log('Document updated successfully:', result);
+        Section.updateOne({ _id: req.body._id },
+             { $set: { 
+                title: req.body.title,
+                content: req.body.content, 
+            } 
+        })
+            .then(section => {
+                res.status(201).json({
+                    message: "section updated successfully",
+                    _id: section?._id || null,
+                    success: true
+                });
             })
             
 
