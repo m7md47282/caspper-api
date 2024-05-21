@@ -69,13 +69,14 @@ app.post("/api/section", (req, res, next) => {
         content: req.body.content,
     }
 
-    if(req.body._id){
+    if (req.body._id) {
         Section.updateOne({ _id: req.body._id },
-             { $set: { 
-                title: req.body.title,
-                content: req.body.content, 
-            } 
-        })
+            {
+                $set: {
+                    title: req.body.title,
+                    content: req.body.content,
+                }
+            })
             .then(section => {
                 res.status(201).json({
                     message: "section updated successfully",
@@ -83,7 +84,6 @@ app.post("/api/section", (req, res, next) => {
                     success: true
                 });
             })
-            
 
         return
     }
@@ -110,7 +110,7 @@ app.get("/api/sections", (req, res, next) => {
                 success: true
             })
         } else {
-            res.status(200).json({
+            res.status(404).json({
                 message: "no data!",
                 data: [],
                 success: true
